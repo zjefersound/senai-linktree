@@ -1,33 +1,44 @@
 /**
  * styles.css
  * -----------------------------------------------------------------------
- * Paleta em cores sólidas (sem gradientes), pensada para contraste
- * adequado (WCAG AA — mínimo 4.5:1 para texto normal, 3:1 para
+ * Tema lúdico, mas ainda em cores SÓLIDAS (sem gradientes), com
+ * contraste testado para WCAG AA (mínimo 4.5:1 em texto normal, 3:1 em
  * elementos gráficos/foco). Layout responsivo mobile-first.
+ *
+ * Cada cartão de link recebe uma cor sólida do array --accent-*,
+ * alternada automaticamente via :nth-child — não é preciso configurar
+ * cor nenhuma em data.js.
  * -----------------------------------------------------------------------
  */
 
 :root {
   /* Cores base — sólidas, sem gradiente */
-  --color-bg: #f4f4f2;
+  --color-bg: #fffaf0;
   --color-surface: #ffffff;
   --color-text: #1c1917;
-  --color-text-muted: #44403c;
-  --color-border: #d6d3d1;
+  --color-text-muted: #57534e;
+  --color-border: #f0e4c8;
 
-  --color-primary: #1d4ed8;        /* azul — fundo dos botões de link */
-  --color-primary-hover: #1e3a8a;  /* azul mais escuro — hover/active */
+  /* Paleta lúdica — tons "700" com contraste ≥ 4.5:1 sobre texto branco */
+  --accent-1: #1d4ed8; /* azul */
+  --accent-2: #be185d; /* rosa */
+  --accent-3: #15803d; /* verde */
+  --accent-4: #c2410c; /* laranja */
+  --accent-5: #6d28d9; /* roxo */
+
+  --color-primary: var(--accent-1);
   --color-primary-text: #ffffff;
 
-  --color-chip-bg: #e7e5e4;
-  --color-chip-text: #292524;
-  --color-chip-hover-bg: #d6d3d1;
+  --color-chip-bg: #fde68a;
+  --color-chip-text: #713f12;
+  --color-chip-hover-bg: #fcd34d;
 
-  --color-focus: #b45309;          /* âmbar — anel de foco, alto contraste */
+  --color-focus: #b45309; /* âmbar — anel de foco, alto contraste */
 
-  --radius: 10px;
+  --radius: 16px;
   --max-width: 640px;
 
+  --font-display: "Baloo 2", var(--font-base);
   --font-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Helvetica, Arial, sans-serif;
 }
@@ -63,7 +74,7 @@ body {
   padding: 12px 16px;
   border-radius: var(--radius);
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 700;
   transition: top 0.15s ease-in-out;
 }
 
@@ -104,12 +115,69 @@ button:focus-visible {
 }
 
 .page__header {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 20px;
+  padding-top: 8px;
+  overflow: hidden;
+}
+
+/* Confete decorativo — formas sólidas, só enfeite, ignorado por leitores
+   de tela e sem interferir na navegação por teclado. */
+.page__decor {
+  position: absolute;
+  inset: -12px 0 auto 0;
+  height: 140px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.page__decor span {
+  position: absolute;
+  display: block;
+  border-radius: 50%;
+}
+
+.page__decor span:nth-child(1) {
+  top: 4px;
+  left: 8%;
+  width: 22px;
+  height: 22px;
+  background-color: var(--accent-4);
+}
+
+.page__decor span:nth-child(2) {
+  top: 36px;
+  right: 12%;
+  width: 16px;
+  height: 16px;
+  background-color: var(--accent-3);
+}
+
+.page__decor span:nth-child(3) {
+  top: 0;
+  right: 28%;
+  width: 12px;
+  height: 12px;
+  background-color: var(--accent-2);
+  border-radius: 4px;
+  transform: rotate(20deg);
+}
+
+.page__decor span:nth-child(4) {
+  top: 46px;
+  left: 22%;
+  width: 10px;
+  height: 10px;
+  background-color: var(--accent-5);
+  border-radius: 3px;
+  transform: rotate(-15deg);
 }
 
 .page__main {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   gap: 28px;
@@ -120,7 +188,7 @@ button:focus-visible {
   color: var(--color-text-muted);
   font-size: 0.875rem;
   padding-top: 16px;
-  border-top: 1px solid var(--color-border);
+  border-top: 2px dashed var(--color-border);
 }
 
 /* -------------------------------------------------------------------- */
@@ -128,6 +196,8 @@ button:focus-visible {
 /* -------------------------------------------------------------------- */
 
 .profile {
+  position: relative;
+  z-index: 1;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -140,21 +210,23 @@ button:focus-visible {
   height: 96px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid var(--color-surface);
-  outline: 1px solid var(--color-border);
+  border: 4px solid var(--color-surface);
+  outline: 3px solid var(--accent-4);
   margin-bottom: 8px;
 }
 
 .profile__name {
-  font-size: 1.5rem;
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 700;
   margin: 0;
   color: var(--color-text);
 }
 
 .profile__role {
   margin: 0;
-  color: var(--color-primary);
-  font-weight: 600;
+  color: var(--accent-1);
+  font-weight: 700;
   font-size: 0.95rem;
 }
 
@@ -184,10 +256,10 @@ button:focus-visible {
   background-color: var(--color-chip-bg);
   color: var(--color-chip-text);
   text-decoration: none;
-  padding: 6px 12px;
+  padding: 6px 14px;
   border-radius: 999px;
   font-size: 0.85rem;
-  font-weight: 600;
+  font-weight: 700;
   min-height: 32px;
   line-height: 20px;
 }
@@ -197,7 +269,7 @@ button:focus-visible {
 }
 
 /* -------------------------------------------------------------------- */
-/* Seções (turmas)                                                      */
+/* Seções                                                                */
 /* -------------------------------------------------------------------- */
 
 .section {
@@ -208,10 +280,12 @@ button:focus-visible {
 }
 
 .section__title {
-  font-size: 1.1rem;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
   margin: 0;
   padding-bottom: 8px;
-  border-bottom: 2px solid var(--color-border);
+  border-bottom: 3px dashed var(--color-border);
   color: var(--color-text);
 }
 
@@ -241,21 +315,49 @@ button:focus-visible {
   background-color: var(--color-primary);
   color: var(--color-primary-text);
   text-decoration: none;
-  padding: 14px 18px;
+  padding: 16px 20px;
   border-radius: var(--radius);
   min-height: 44px; /* alvo de toque acessível */
   justify-content: center;
-  transition: background-color 0.1s ease-in-out;
+  box-shadow: 0 3px 0 rgb(0 0 0 / 18%);
+  transition: transform 0.12s ease-out, box-shadow 0.12s ease-out,
+    filter 0.12s ease-out;
 }
 
 .link-item__anchor:hover,
+.link-item__anchor:focus-visible {
+  filter: brightness(0.92);
+  transform: translateY(-2px) scale(1.015);
+  box-shadow: 0 5px 0 rgb(0 0 0 / 18%);
+}
+
 .link-item__anchor:active {
-  background-color: var(--color-primary-hover);
+  filter: brightness(0.85);
+  transform: translateY(0) scale(0.99);
+  box-shadow: 0 2px 0 rgb(0 0 0 / 18%);
+}
+
+/* Cores giram automaticamente entre os 5 tons lúdicos definidos em :root */
+.link-item:nth-child(5n + 1) .link-item__anchor {
+  background-color: var(--accent-1);
+}
+.link-item:nth-child(5n + 2) .link-item__anchor {
+  background-color: var(--accent-2);
+}
+.link-item:nth-child(5n + 3) .link-item__anchor {
+  background-color: var(--accent-3);
+}
+.link-item:nth-child(5n + 4) .link-item__anchor {
+  background-color: var(--accent-4);
+}
+.link-item:nth-child(5n + 5) .link-item__anchor {
+  background-color: var(--accent-5);
 }
 
 .link-item__label {
+  font-family: var(--font-display);
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 1.05rem;
 }
 
 .link-item__description {
@@ -275,18 +377,23 @@ button:focus-visible {
   }
 
   .profile__name {
-    font-size: 1.75rem;
+    font-size: 2rem;
   }
 
   .section__title {
-    font-size: 1.25rem;
+    font-size: 1.4rem;
   }
 }
 
-/* Reduz movimento para quem prefere (o site já não usa animações
-   fortes, mas evitamos qualquer transição para esse público). */
+/* Reduz movimento para quem prefere. */
 @media (prefers-reduced-motion: reduce) {
   * {
     transition: none !important;
+  }
+
+  .link-item__anchor:hover,
+  .link-item__anchor:focus-visible,
+  .link-item__anchor:active {
+    transform: none;
   }
 }
