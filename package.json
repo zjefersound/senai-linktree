@@ -1,0 +1,9 @@
+{
+  "name": "senai-linktree",
+  "version": "1.0.0",
+  "description": "Linktree de turmas — HTML, CSS e JS puros, sem build.",
+  "private": true,
+  "scripts": {
+    "start": "node server.js"
+  }
+}
