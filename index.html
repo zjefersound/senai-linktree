@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Meus Links — Prof. Seu Nome</title>
+  <title>Meus Links — Prof. Jeferson Souza (Jeff)</title>
   <meta name="description" content="Uma coleção de projetos e links divertidos." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -11,7 +11,7 @@
     href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&display=swap"
     rel="stylesheet"
   />
-  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="styles/global.css" />
 </head>
 <body>
   <a class="skip-link" href="#main-content">Pular para o conteúdo</a>
@@ -21,12 +21,19 @@
       <div class="page__decor" aria-hidden="true">
         <span></span><span></span><span></span><span></span>
       </div>
-      <div id="profile-mount"></div>
-      <div id="quick-nav-mount"></div>
+
+      <div class="profile">
+        <h1 class="profile__name">Prof. Jeferson Souza (Jeff)</h1>
+        <p class="profile__role">SENAI — Professor de programação (ou o que o chefe mandar)</p>
+        <p class="profile__bio">Links úties para as aulas</p>
+      </div>
     </header>
 
     <main id="main-content" class="page__main">
-      <div id="sections-mount"></div>
+      <section class="section" aria-labelledby="links-heading">
+        <h2 id="links-heading" class="section__title">Meus projetos 🎮</h2>
+        <ul id="links" class="links"></ul>
+      </section>
     </main>
 
     <footer class="page__footer">
@@ -34,6 +41,6 @@
     </footer>
   </div>
 
-  <script type="module" src="js/app.js"></script>
+  <script type="module" src="js/index.mjs"></script>
 </body>
 </html>

@@ -1,9 +1,8 @@
 /**
- * components/LinkItem.js
+ * card.mjs
  * -----------------------------------------------------------------------
- * Componente responsável por renderizar UM link (um item clicável).
- * Recebe um objeto { label, url, description } e devolve um <li> pronto
- * para ser inserido em uma lista.
+ * Componente: um cartão de link. Recebe os dados de um link e devolve
+ * um <li> pronto para ser inserido na lista (#links).
  * -----------------------------------------------------------------------
  */
 
@@ -11,16 +10,15 @@
  * @param {{ label: string, url: string, description?: string }} link
  * @returns {HTMLLIElement}
  */
-export function createLinkItem({ label, url, description }) {
+export function createCard({ label, url, description }) {
   const item = document.createElement("li");
-  item.className = "link-item";
+  item.className = "card";
 
   const anchor = document.createElement("a");
-  anchor.className = "link-item__anchor";
+  anchor.className = "card__link";
   anchor.href = url;
 
   // Links externos abrem em nova aba com segurança (noopener/noreferrer).
-  // mailto:/tel: continuam na mesma aba, comportamento nativo.
   const isExternal = /^https?:\/\//i.test(url);
   if (isExternal) {
     anchor.target = "_blank";
@@ -28,13 +26,13 @@ export function createLinkItem({ label, url, description }) {
   }
 
   const labelEl = document.createElement("span");
-  labelEl.className = "link-item__label";
+  labelEl.className = "card__label";
   labelEl.textContent = label;
   anchor.appendChild(labelEl);
 
   if (description) {
     const descEl = document.createElement("span");
-    descEl.className = "link-item__description";
+    descEl.className = "card__description";
     descEl.textContent = description;
     anchor.appendChild(descEl);
   }
