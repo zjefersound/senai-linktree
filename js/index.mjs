@@ -6,6 +6,7 @@ const links = [
   { label: "Saveiro", url: "https://saveiro.netlify.app/" },
   { label: "Blender da Shopee", url: "https://blender-da-shopee.netlify.app/" },
   { label: "Web Piano", url: "https://web-piano-tan.vercel.app/" },
+  { label: "Xadrez", url: "https://chadreis.netlify.app/" },
 ];
 
 function renderLinks() {
