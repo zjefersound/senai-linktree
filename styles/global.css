@@ -31,10 +31,20 @@
 
   --color-focus: #b45309; /* âmbar — anel de foco, alto contraste */
 
-  --radius: 16px;
+  /* Céu 8-bit — faixas SÓLIDAS (sem blend), reaproveitando a paleta acima.
+     Hardware 8-bit de verdade também não tinha gradiente suave: um "degradê"
+     nessa época era sempre feito em faixas de cor sólida como estas. */
+  --sky-1: #140f2e; /* noite */
+  --sky-2: var(--accent-5);
+  --sky-3: #9333ea;
+  --sky-4: var(--accent-2);
+  --sky-5: var(--accent-4); /* horizonte */
+
+  --radius: 6px;
   --max-width: 640px;
 
   --font-display: "Baloo 2", var(--font-base);
+  --font-pixel: "Press Start 2P", var(--font-display);
   --font-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Helvetica, Arial, sans-serif;
 }
@@ -49,12 +59,58 @@ html {
 
 body {
   margin: 0;
+  min-height: 100vh;
+  padding: 20px;
   font-family: var(--font-base);
-  background-color: var(--color-bg);
   color: var(--color-text);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+
+  /* Pôr do sol em faixas sólidas — cada cor se repete no início/fim do seu
+     trecho, então não há blend nenhum entre elas, só um corte duro. */
+  background-color: var(--sky-1);
+  background-image: linear-gradient(
+    to bottom,
+    var(--sky-1) 0%,
+    var(--sky-1) 20%,
+    var(--sky-2) 20%,
+    var(--sky-2) 40%,
+    var(--sky-3) 40%,
+    var(--sky-3) 60%,
+    var(--sky-4) 60%,
+    var(--sky-4) 80%,
+    var(--sky-5) 80%,
+    var(--sky-5) 100%
+  );
 }
+
+/* Estrelinhas pixeladas atrás do painel — decorativas, não interferem na
+   leitura nem na navegação por teclado. */
+.bg-stars {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.bg-stars span {
+  position: absolute;
+  display: block;
+  width: 4px;
+  height: 4px;
+  background-color: #fff8e7;
+}
+
+.bg-stars span:nth-child(1) { top: 6%; left: 8%; }
+.bg-stars span:nth-child(2) { top: 12%; left: 82%; width: 6px; height: 6px; }
+.bg-stars span:nth-child(3) { top: 20%; left: 45%; }
+.bg-stars span:nth-child(4) { top: 28%; left: 20%; width: 6px; height: 6px; }
+.bg-stars span:nth-child(5) { top: 9%; left: 65%; }
+.bg-stars span:nth-child(6) { top: 34%; left: 90%; }
+.bg-stars span:nth-child(7) { top: 40%; left: 6%; width: 6px; height: 6px; }
+.bg-stars span:nth-child(8) { top: 46%; left: 55%; }
+.bg-stars span:nth-child(9) { top: 55%; left: 30%; }
+.bg-stars span:nth-child(10) { top: 15%; left: 30%; }
 
 /* -------------------------------------------------------------------- */
 /* Acessibilidade: skip-link, foco visível, utilitário sr-only          */
@@ -102,12 +158,17 @@ button:focus-visible {
 /* -------------------------------------------------------------------- */
 
 .page {
+  position: relative;
   max-width: var(--max-width);
   margin: 0 auto;
   padding: 24px 16px 48px;
   display: flex;
   flex-direction: column;
   gap: 32px;
+  background-color: var(--color-surface);
+  border: 4px solid var(--color-text);
+  border-radius: 0;
+  box-shadow: 6px 6px 0 var(--color-text);
 }
 
 .page__header {
@@ -132,33 +193,30 @@ button:focus-visible {
 .page__decor span {
   position: absolute;
   display: block;
-  border-radius: 50%;
 }
 
 .page__decor span:nth-child(1) {
   top: 4px;
   left: 8%;
-  width: 22px;
-  height: 22px;
+  width: 18px;
+  height: 18px;
   background-color: var(--accent-4);
 }
 
 .page__decor span:nth-child(2) {
   top: 36px;
   right: 12%;
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
   background-color: var(--accent-3);
 }
 
 .page__decor span:nth-child(3) {
   top: 0;
   right: 28%;
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
   background-color: var(--accent-2);
-  border-radius: 4px;
-  transform: rotate(20deg);
 }
 
 .page__decor span:nth-child(4) {
@@ -167,8 +225,6 @@ button:focus-visible {
   width: 10px;
   height: 10px;
   background-color: var(--accent-5);
-  border-radius: 3px;
-  transform: rotate(-15deg);
 }
 
 .page__main {
@@ -235,11 +291,12 @@ button:focus-visible {
 }
 
 .section__title {
-  font-family: var(--font-display);
-  font-size: 1.3rem;
-  font-weight: 700;
+  font-family: var(--font-pixel);
+  font-size: 0.95rem;
+  font-weight: 400;
+  line-height: 1.6;
   margin: 0;
-  padding-bottom: 8px;
+  padding-bottom: 12px;
   border-bottom: 3px dashed var(--color-border);
   color: var(--color-text);
 }
@@ -260,30 +317,28 @@ button:focus-visible {
 .card__link {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 4px;
   background-color: var(--color-primary);
   color: var(--color-primary-text);
   text-decoration: none;
   padding: 16px 20px;
+  border: 3px solid var(--color-text);
   border-radius: var(--radius);
   min-height: 44px; /* alvo de toque acessível */
   justify-content: center;
-  box-shadow: 0 3px 0 rgb(0 0 0 / 18%);
-  transition: transform 0.12s ease-out, box-shadow 0.12s ease-out,
-    filter 0.12s ease-out;
+  box-shadow: 4px 4px 0 var(--color-text);
+  transition: transform 0.1s ease-out, box-shadow 0.1s ease-out;
 }
 
 .card__link:hover,
 .card__link:focus-visible {
-  filter: brightness(0.92);
-  transform: translateY(-2px) scale(1.015);
-  box-shadow: 0 5px 0 rgb(0 0 0 / 18%);
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--color-text);
 }
 
 .card__link:active {
-  filter: brightness(0.85);
-  transform: translateY(0) scale(0.99);
-  box-shadow: 0 2px 0 rgb(0 0 0 / 18%);
+  transform: translate(4px, 4px);
+  box-shadow: 0 0 0 var(--color-text);
 }
 
 /* Cores giram automaticamente entre os 5 tons lúdicos definidos em :root */
@@ -304,9 +359,10 @@ button:focus-visible {
 }
 
 .card__label {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 1.05rem;
+  font-family: var(--font-pixel);
+  font-weight: 400;
+  font-size: 0.8rem;
+  line-height: 1.6;
 }
 
 .card__description {
@@ -320,6 +376,10 @@ button:focus-visible {
 /* -------------------------------------------------------------------- */
 
 @media (min-width: 600px) {
+  body {
+    padding: 40px 24px;
+  }
+
   .page {
     padding-top: 40px;
     gap: 40px;
@@ -330,7 +390,11 @@ button:focus-visible {
   }
 
   .section__title {
-    font-size: 1.4rem;
+    font-size: 1.1rem;
+  }
+
+  .card__label {
+    font-size: 0.9rem;
   }
 }
 

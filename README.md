@@ -56,6 +56,11 @@ Para mudar o layout do cartão de link, edite [`js/card.mjs`](js/card.mjs)
 
 ## Acessibilidade e design
 
+- Visual retrô 8-bit: fundo em faixas de cor sólidas simulando um pôr do
+  sol pixelado (sem gradiente com blend — cada faixa é uma cor sólida,
+  como nos jogos 8-bit de verdade), painel com moldura grossa e sombra
+  "dura" (sem blur), fonte pixelada ("Press Start 2P") no título da seção
+  e nos botões de link.
 - Cores sólidas, sem gradientes, com contraste testado para WCAG AA
   (mínimo 4.5:1 em texto normal).
 - Landmarks semânticos (`header`, `main`, `footer`), link "Pular para o

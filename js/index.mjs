@@ -1,7 +1,7 @@
 import { createCard } from "./card.mjs";
 
 const links = [
-  { label: "Jeff2048", url: "https://jeff2048.netlify.app/" },
+  { label: "2048", url: "https://jeff2048.netlify.app/" },
   { label: "Tubos", url: "https://tubos.netlify.app/" },
   { label: "Saveiro", url: "https://saveiro.netlify.app/" },
   { label: "Blender da Shopee", url: "https://blender-da-shopee.netlify.app/" },
