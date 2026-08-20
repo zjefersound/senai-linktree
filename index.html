@@ -4,16 +4,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Meus Links — Prof. Jeferson Souza (Jeff)</title>
-  <meta name="description" content="Uma coleção de projetos e links divertidos." />
+  <meta name="description" content="Uma coleção de projetos e links divertidos, em estilo retrô 8-bit." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Press+Start+2P&display=swap"
     rel="stylesheet"
   />
   <link rel="stylesheet" href="styles/global.css" />
 </head>
 <body>
+  <!-- Céu pixelado decorativo atrás do painel — apenas enfeite. -->
+  <div class="bg-stars" aria-hidden="true">
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+
   <a class="skip-link" href="#main-content">Pular para o conteúdo</a>
 
   <div class="page">
@@ -25,13 +31,13 @@
       <div class="profile">
         <h1 class="profile__name">Prof. Jeferson Souza (Jeff)</h1>
         <p class="profile__role">SENAI — Professor de programação (ou o que o chefe mandar)</p>
-        <p class="profile__bio">Links úties para as aulas</p>
+        <p class="profile__bio">Links úteis para as aulas</p>
       </div>
     </header>
 
     <main id="main-content" class="page__main">
       <section class="section" aria-labelledby="links-heading">
-        <h2 id="links-heading" class="section__title">Meus projetos 🎮</h2>
+        <h2 id="links-heading" class="section__title">Meus projetos</h2>
         <ul id="links" class="links"></ul>
       </section>
     </main>
