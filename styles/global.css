@@ -180,53 +180,6 @@ button:focus-visible {
   overflow: hidden;
 }
 
-/* Confete decorativo — formas sólidas, só enfeite, ignorado por leitores
-   de tela e sem interferir na navegação por teclado. */
-.page__decor {
-  position: absolute;
-  inset: -12px 0 auto 0;
-  height: 140px;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.page__decor span {
-  position: absolute;
-  display: block;
-}
-
-.page__decor span:nth-child(1) {
-  top: 4px;
-  left: 8%;
-  width: 18px;
-  height: 18px;
-  background-color: var(--accent-4);
-}
-
-.page__decor span:nth-child(2) {
-  top: 36px;
-  right: 12%;
-  width: 14px;
-  height: 14px;
-  background-color: var(--accent-3);
-}
-
-.page__decor span:nth-child(3) {
-  top: 0;
-  right: 28%;
-  width: 10px;
-  height: 10px;
-  background-color: var(--accent-2);
-}
-
-.page__decor span:nth-child(4) {
-  top: 46px;
-  left: 22%;
-  width: 10px;
-  height: 10px;
-  background-color: var(--accent-5);
-}
-
 .page__main {
   position: relative;
   z-index: 1;
