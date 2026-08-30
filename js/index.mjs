@@ -12,6 +12,7 @@ const projectLinks = [
 const gameLinks = [
   { label: "Geometry Dash", url: "https://scratch.mit.edu/projects/143179860/" },
   { label: "diep.io", url: "https://scratch.mit.edu/projects/131270192/" },
+  { label: "Minecraft", url: "https://scratch.mit.edu/projects/1315704071/" },
 ];
 
 const linkSections = [
