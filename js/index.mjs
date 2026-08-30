@@ -1,6 +1,6 @@
 import { createCard } from "./card.mjs";
 
-const links = [
+const projectLinks = [
   { label: "2048", url: "https://jeff2048.netlify.app/" },
   { label: "Tubos", url: "https://tubos.netlify.app/" },
   { label: "Saveiro", url: "https://saveiro.netlify.app/" },
@@ -9,9 +9,44 @@ const links = [
   { label: "Xadrez", url: "https://chadreis.netlify.app/" },
 ];
 
-function renderLinks() {
-  const list = document.getElementById("links");
+const gameLinks = [
+  { label: "Geometry Dash", url: "https://scratch.mit.edu/projects/143179860/" },
+  { label: "diep.io", url: "https://scratch.mit.edu/projects/131270192/" },
+];
+
+const linkSections = [
+  { id: "links", title: "Meus projetos", links: projectLinks },
+  { id: "scratch", title: "Jogos scratch", links: gameLinks },
+];
+
+function renderLinks(sectionListId = "links", links) {
+  const list = document.getElementById(sectionListId);
   links.forEach((link) => list.appendChild(createCard(link)));
+}
+
+function renderSections(sections) {
+  const mainElement = document.getElementById("main-content")
+  sections.forEach(section => {
+    const sectionElement = document.createElement("section")
+    sectionElement.className = "section"
+    sectionElement["aria-labelledby"] = "links-heading"
+    
+
+    const sectiontitleElement = document.createElement("h2")
+    sectiontitleElement.id="links-heading"
+    sectiontitleElement.className="section__title"
+    sectiontitleElement.innerText=section.title
+
+    const sectionListElement = document.createElement("ul")
+    sectionListElement.id=section.id
+    sectionListElement.className="links"   
+
+    // render html
+    mainElement.appendChild(sectionElement)
+    sectionElement.appendChild(sectiontitleElement)
+    sectionElement.appendChild(sectionListElement)
+    renderLinks(section.id, section.links)
+  })
 }
 
 function renderYear() {
@@ -20,7 +55,7 @@ function renderYear() {
 }
 
 function init() {
-  renderLinks();
+  renderSections(linkSections)
   renderYear();
 }
 
