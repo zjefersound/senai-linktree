@@ -1,6 +1,7 @@
 import { createCard } from "./card.mjs";
 
 const projectLinks = [
+  { label: "Perfil no scratch", url: "https://scratch.mit.edu/users/zjefersound/" },
   { label: "2048", url: "https://jeff2048.netlify.app/" },
   { label: "Tubos", url: "https://tubos.netlify.app/" },
   { label: "Saveiro", url: "https://saveiro.netlify.app/" },
